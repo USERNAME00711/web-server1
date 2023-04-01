@@ -23,7 +23,7 @@ public class HttpConnectionWorkerThread extends Thread {
         return socket;
     }
 
-    private HttpQueryParser my_parser = new HttpQueryParser() ;
+   // private HttpQueryParser my_parser = new HttpQueryParser() ;
 
     public HttpConnectionWorkerThread(Socket socket) {
         this.socket = socket;
@@ -40,46 +40,51 @@ public class HttpConnectionWorkerThread extends Thread {
            // HashMap<String, String> queryParams = my_parser.parseQueryParams(getSocket());
 
             inputStream = socket.getInputStream();
-           // inputStream.read();
             outputStream = socket.getOutputStream();
-           // HashMap<String, String> queryParams = my_parser.parseQueryParams(getSocket());
-           // System.out.println(queryParams.toString());
-           // LOGGER.info(queryParams.toString());
-            //LOGGER.info("ypppppppppppppp");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String query = "";
+            String inputLine;
+            while ((inputLine = reader.readLine()) != null) {
+               // System.out.println(inputLine);
+                if (inputLine.startsWith("GET")) {
+                    int idx1 = inputLine.indexOf("?") + 1;
+                    int idx2 = inputLine.indexOf(" HTTP/");
+                    if (idx1 > 0 && idx2 > 0 && idx1 < idx2) {
+                        query = inputLine.substring(idx1, idx2);
+                        System.out.println(query);
+                    }
+                }
 
-// Read the request line
-            String requestLine = reader.readLine();
-            String[] requestLineParts = requestLine.split("\\s+");
-            String method = requestLineParts[0];
-            String path = requestLineParts[1];
-            String httpVersion = requestLineParts[2];
 
-// Read the headers
-            HashMap<String, String> headers = new HashMap<>();
-            String headerLine;
-            while ((headerLine = reader.readLine()) != null && !headerLine.isEmpty()) {
-                String[] headerParts = headerLine.split(":\\s+");
-                headers.put(headerParts[0], headerParts[1]);
+                if (inputLine.equals("")) {
+                    break;
+                }
+
             }
 
-// Read the body (if present)
-            StringBuilder bodyBuilder = new StringBuilder();
-            if (headers.containsKey("Content-Length")) {
-                int contentLength = Integer.parseInt(headers.get("Content-Length"));
-                char[] buffer = new char[contentLength];
-                int bytesRead = reader.read(buffer, 0, contentLength);
-                bodyBuilder.append(buffer, 0, bytesRead);
+            HashMap<String, String> queryParams = new HashMap<>();
+            String[] pairs = query.split("&");
+            for (String pair : pairs) {
+                String[] keyValue = pair.split("=");
+                if (keyValue.length == 2) {
+                    String key = keyValue[0];
+                    String value = keyValue[1];
+                    queryParams.put(key, value);
+                }
             }
+           /* queryParams.forEach((key, value) -> {
+                System.out.println(key + " => " + value);
+            });/*
+           // inputStream.read();
 
-            String body = bodyBuilder.toString();
-            File file = new File("output.txt"); // the file you want to write to
+          /* byte[] buffer = new byte[1024];
 
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(body);
-            } catch (IOException e) {
-                // handle exception
-            }
+            int bytesRead = inputStream.read(buffer);
+            String data = new String(buffer, 0, bytesRead);
+            Httpparser.parseQueryParams(data);*/
+
+            // do something with the data
+            //System.out.println("Received data: " + data);
             String html = "<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
 
             final String CRLF = "\r\n"; // 13, 10

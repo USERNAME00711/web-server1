@@ -30,6 +30,10 @@ public class HttpServer {
         try {
             ServerListenerThread serverListenerThread = new ServerListenerThread(conf.getPort(), conf.getWebroot());
             serverListenerThread.start();
+
+
+
+            Process process = pb.start();
         } catch (IOException e) {
             e.printStackTrace();
             // TODO handle later.

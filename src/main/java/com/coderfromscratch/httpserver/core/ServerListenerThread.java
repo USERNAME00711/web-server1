@@ -29,7 +29,9 @@ public class ServerListenerThread extends Thread {
         try {
 
             while ( serverSocket.isBound() && !serverSocket.isClosed()) {
+
                 Socket socket = serverSocket.accept();
+
 
                 LOGGER.info(" * Connection accepted: " + socket.getInetAddress());
 
@@ -43,6 +45,7 @@ public class ServerListenerThread extends Thread {
         } finally {
             if (serverSocket!=null) {
                 try {
+                    System.out.println("closef");
                     serverSocket.close();
                 } catch (IOException e) {}
             }
