@@ -1,5 +1,4 @@
-package PROJECT.WEBSERVER;
-
+package com.coderfromscratch.http;
 public class HttpRequestligne {
     String mehod;
     String Protocole;

@@ -1,4 +1,4 @@
-package PROJECT.WEBSERVER;
+package com.coderfromscratch.http;
 
 public class HttpRequestligneParser {
 
