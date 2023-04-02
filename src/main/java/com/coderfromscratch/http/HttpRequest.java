@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class HttpRequest {
-    private HashMap<String , String> Mapheaders = new HashMap<>();
+    public HashMap<String , String> Mapheaders = new HashMap<>();
     private HttpRequestligne requestligne;
     private HttpContentBody body;
     public void setRequestligne(HttpRequestligne requestligne) {

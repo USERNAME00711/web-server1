@@ -2,6 +2,10 @@ package com.coderfromscratch.httpserver.core;
 import java.util.HashMap;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import com.coderfromscratch.http.HttpRequest;
+import com.coderfromscratch.http.HttpRequestligne;
+import com.coderfromscratch.http.httpRequestParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
@@ -41,62 +45,32 @@ public class HttpConnectionWorkerThread extends Thread {
 
             inputStream = socket.getInputStream();
             outputStream = socket.getOutputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String query = "";
-            String inputLine;
-            while ((inputLine = reader.readLine()) != null) {
-               // System.out.println(inputLine);
-                if (inputLine.startsWith("GET")) {
-                    int idx1 = inputLine.indexOf("?") + 1;
-                    int idx2 = inputLine.indexOf(" HTTP/");
-                    if (idx1 > 0 && idx2 > 0 && idx1 < idx2) {
-                        query = inputLine.substring(idx1, idx2);
-                        System.out.println(query);
-                    }
-                }
-
-
-                if (inputLine.equals("")) {
-                    break;
-                }
-
-            }
-
-            HashMap<String, String> queryParams = new HashMap<>();
-            String[] pairs = query.split("&");
-            for (String pair : pairs) {
-                String[] keyValue = pair.split("=");
-                if (keyValue.length == 2) {
-                    String key = keyValue[0];
-                    String value = keyValue[1];
-                    queryParams.put(key, value);
-                }
-            }
-           /* queryParams.forEach((key, value) -> {
-                System.out.println(key + " => " + value);
-            });/*
-           // inputStream.read();
-
-          /* byte[] buffer = new byte[1024];
-
+            byte[] buffer = new byte[1024];
             int bytesRead = inputStream.read(buffer);
             String data = new String(buffer, 0, bytesRead);
-            Httpparser.parseQueryParams(data);*/
+            httpRequestParser my_parser = new httpRequestParser();
+            HttpRequest my_request = my_parser.Parse(data)  ;
+            HttpRequestligne line =my_request.getRequestligne();
+            System.out.println(my_request.Mapheaders );
 
-            // do something with the data
-            //System.out.println("Received data: " + data);
-            String html = "<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
 
-            final String CRLF = "\r\n"; // 13, 10
 
-            String response =
+
+            //String html = "<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
+
+           // final String CRLF = "\r\n"; // 13, 10
+
+            /*String response =
                     "HTTP/1.1 200 OK" + CRLF + // Status Line  :   HTTTP_VERSION RESPONSE_CODE RESPONSE_MESSAGE
                             "Content-Length: " + html.getBytes().length + CRLF + // HEADER
                             CRLF +
                             html +
                             CRLF + CRLF;
 
-            outputStream.write(response.getBytes());
+            outputStream.write(response.getBytes());*/
+
+            HTTPResponse httpResponse = new HTTPResponse() ;
+            httpResponse.send(outputStream);
 
             LOGGER.info(" * Connection Processing Finished.");
         } catch (IOException e) {

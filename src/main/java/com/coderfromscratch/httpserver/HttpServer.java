@@ -33,7 +33,7 @@ public class HttpServer {
 
 
 
-            Process process = pb.start();
+
         } catch (IOException e) {
             e.printStackTrace();
             // TODO handle later.

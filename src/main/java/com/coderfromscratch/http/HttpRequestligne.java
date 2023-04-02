@@ -4,6 +4,7 @@ public class HttpRequestligne {
     String Protocole;
     String Uri;
 
+
     public HttpRequestligne(String Mehod,String uri ,String protocole) {
         Uri = uri;
         mehod=Mehod;
