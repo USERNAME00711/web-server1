@@ -1,9 +1,6 @@
-package com.coderfromscratch.http;
+package com.coderfromscratch.HTTP_dataType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 public class HttpRequest {
     public HashMap<String , String> Mapheaders = new HashMap<>();

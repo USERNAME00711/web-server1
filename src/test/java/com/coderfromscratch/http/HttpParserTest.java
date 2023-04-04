@@ -1,5 +1,6 @@
 package com.coderfromscratch.http;
 
+import com.coderfromscratch.HTTP_dataType.HttpRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

@@ -1,4 +1,4 @@
-package com.coderfromscratch.http;
+package com.coderfromscratch.HTTP_dataType;
 public class HttpRequestligne {
     String mehod;
     String Protocole;

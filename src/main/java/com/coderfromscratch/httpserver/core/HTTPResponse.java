@@ -1,5 +1,7 @@
 package com.coderfromscratch.httpserver.core;
 
+import com.coderfromscratch.httpserver.config.Configuration;
+
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -16,7 +18,7 @@ public class HTTPResponse {
         this.statusCode = 200;
         this.statusMessage = "OK";
         this.headers = new HashMap<>();
-        this.content = "";
+        this.content = "\"<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
         this.contentType = "text/html";
     }
 
@@ -41,6 +43,7 @@ public class HTTPResponse {
     }
 
     public void send(OutputStream out) throws Exception {
+
         String statusLine = "HTTP/1.1 " + statusCode + " " + statusMessage + "\r\n";
         out.write(statusLine.getBytes(StandardCharsets.UTF_8));
 
@@ -52,18 +55,27 @@ public class HTTPResponse {
         }
         out.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
-        if (!content.isEmpty()) {
-            out.write(content.getBytes(StandardCharsets.UTF_8));
-        } else {
-            // Execute PHP script and capture output
-            ProcessBuilder pb = new ProcessBuilder("php", "script.php");
+
+
+            // Execute PHP script and capture output (body)
+        String path = Configuration.getWebroot();
+        System.out.println(path);
+            ProcessBuilder pb = new ProcessBuilder("php", path+"\\script.php");
             Process p = pb.start();
             String output = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-            System.out.println(output);
+            out.write(output.getBytes());
 
-            out.write(output.getBytes(StandardCharsets.UTF_8));
-        }
 
-        out.flush();
-    }
-}
+
+
+
+
+
+
+
+        //System.out.println(output);
+
+
+
+
+}}

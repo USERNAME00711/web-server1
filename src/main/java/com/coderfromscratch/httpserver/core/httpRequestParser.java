@@ -1,10 +1,13 @@
-package com.coderfromscratch.http;
+package com.coderfromscratch.httpserver.core;
+
+import com.coderfromscratch.HTTP_dataType.*;
+
 
 public class httpRequestParser {
 
     private HttpHederParser httpHederParser=new HttpHederParser();
-    private  HttpRequestligneParser httpRequestligneParser=new HttpRequestligneParser();
-    public  HttpRequest Parse ( String request) throws Exception {
+    private HttpRequestligneParser httpRequestligneParser=new HttpRequestligneParser();
+    public HttpRequest Parse (String request) throws Exception {
         HttpRequest httpRequest = new HttpRequest();
         boolean parsingError = false;
         String[] httpLines=request.split("\r\n");

@@ -1,19 +1,19 @@
 package com.coderfromscratch.httpserver.config;
 
-public class Configuration {
+ public  class Configuration {
 
     private int port;
-    private String webroot;
+    private static String  webroot;
 
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public  void setPort(int port) {
         this.port = port;
     }
 
-    public String getWebroot() {
+    public  static String getWebroot() {
         return webroot;
     }
 

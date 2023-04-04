@@ -1,4 +1,4 @@
-package com.coderfromscratch.http;
+package com.coderfromscratch.HTTP_dataType;
 
 public class HttpHederParser {
     public  HttpHeder parse(String httpligne,boolean parsingError )
