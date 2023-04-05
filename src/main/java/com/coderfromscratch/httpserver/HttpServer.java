@@ -18,6 +18,7 @@ public class HttpServer {
     private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
     public static void main(String[] args) {
+        System.out.println("heeello");
 
         LOGGER.info("Server starting...");
 
