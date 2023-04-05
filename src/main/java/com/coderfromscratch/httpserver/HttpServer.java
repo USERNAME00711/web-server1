@@ -7,40 +7,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
-/**
- *
- * Driver Class for the Http Server
- *
- */
+
 public class HttpServer {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
+     private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
-    public static void main(String[] args) {
-        System.out.println("");
+    public static void main(String[] args) throws IOException {
 
+        List<Configuration>conf;
         LOGGER.info("Server starting...");
-
-        ConfigurationManager.getInstance().loadConfigurationFile("src/main/resources/http.json");
-        Configuration conf = ConfigurationManager.getInstance().getCurrentConfiguration();
-
-        LOGGER.info("Using Port: " + conf.getPort());
-        LOGGER.info("Using WebRoot: " + conf.getWebroot());
-
+        ConfigurationManager.getInstance().loadConfigurationFile("/home/abderrahmane/web-server1/src/main/resources/http.json");
+        conf = ConfigurationManager.getInstance().getCurrentConfiguration();
+        for ( int i =0;i<conf.size();i++)
         try {
-            ServerListenerThread serverListenerThread = new ServerListenerThread(conf.getPort(), conf.getWebroot());
+             Configuration configuration = conf.get(i);
+             LOGGER.info("Using Port: " + configuration.getPort());
+             LOGGER.info("Using WebRoot: " + configuration.getWebroot());
+
+            ServerListenerThread serverListenerThread = new ServerListenerThread(configuration.getPort(), configuration.getWebroot());
             serverListenerThread.start();
 
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            // TODO handle later.
+           } catch (IOException e) {
+              e.printStackTrace();
+              //TODO handle later.
         }
 
 
-    }
+   }
 
 }

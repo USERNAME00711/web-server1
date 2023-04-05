@@ -1,9 +1,10 @@
 package com.coderfromscratch.httpserver.config;
 
- public  class Configuration {
+public  class Configuration {
 
     private int port;
     private static String  webroot;
+    private static String  domain;
 
     public int getPort() {
         return port;
@@ -16,8 +17,14 @@ package com.coderfromscratch.httpserver.config;
     public  static String getWebroot() {
         return webroot;
     }
+    public  static String getdomain() {
+        return domain;
+    }
 
     public void setWebroot(String webroot) {
         this.webroot = webroot;
+    }
+    public void setDomain(String domain) {
+        this.domain= domain;
     }
 }

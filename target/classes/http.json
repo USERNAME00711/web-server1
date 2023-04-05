@@ -1,5 +1,13 @@
+[
 {
   "port": 8080,
-  "webroot": "C:\\Users\\hp elitebook\\Desktop\\WebRoot",
+  "webroot": "gt",
   "domain" : "www.test.com"
-}
+},
+  {
+    "port": 8081,
+    "webroot": "gtg",
+    "domain" : "www.test.com"
+  }
+
+]
