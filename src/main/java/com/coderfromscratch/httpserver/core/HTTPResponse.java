@@ -61,8 +61,8 @@ public class HTTPResponse {
 
 
             // Execute PHP script and capture output (body)
-        String path = Configuration.getWebroot();
-        System.out.println(path);
+
+
             ProcessBuilder pb = new ProcessBuilder("php", webroot+"\\script.php");
             Process p = pb.start();
             String output = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
