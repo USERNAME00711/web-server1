@@ -1,12 +1,12 @@
 [
 {
-  "port": 8080,
-  "webroot": "gt",
-  "domain" : "www.test.com"
+  "port": 8082,
+  "webroot": "C:\\Users\\hp elitebook\\Desktop\\WebRoot",
+  "domain" : "www.test1.com"
 },
   {
     "port": 8081,
-    "webroot": "gtg",
+    "webroot": "C:\\Users\\hp elitebook\\Desktop\\WebRoot2",
     "domain" : "www.test.com"
   }
 

@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import com.coderfromscratch.HTTP_dataType.HttpRequest;
 import com.coderfromscratch.HTTP_dataType.HttpRequestligne;
+import com.coderfromscratch.httpserver.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +19,13 @@ public class HttpConnectionWorkerThread extends Thread {
     public Socket getSocket() {
         return socket;
     }
+    private Configuration cnf ;
 
    // private HttpQueryParser my_parser = new HttpQueryParser() ;
 
-    public HttpConnectionWorkerThread(Socket socket) {
+    public HttpConnectionWorkerThread(Socket socket , Configuration cnf) {
         this.socket = socket;
+        this.cnf = cnf ;
     }
 
 
@@ -48,20 +51,10 @@ public class HttpConnectionWorkerThread extends Thread {
 
 
 
-            String html = "<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
 
-            final String CRLF = "\r\n"; // 13, 10
 
-            /*String response =
-                    "HTTP/1.1 200 OK" + CRLF + // Status Line  :   HTTTP_VERSION RESPONSE_CODE RESPONSE_MESSAGE
-                            "Content-Length: " + html.getBytes().length + CRLF + // HEADER
-                            CRLF +
-                            html +
-                            CRLF + CRLF;
 
-            outputStream.write(response.getBytes());*/
-
-            HTTPResponse httpResponse = new HTTPResponse() ;
+            HTTPResponse httpResponse = new HTTPResponse(cnf.getWebroot()) ;
             httpResponse.send(outputStream);
 
             LOGGER.info(" * Connection Processing Finished.");

@@ -1,5 +1,6 @@
 package com.coderfromscratch.httpserver.core;
 
+import com.coderfromscratch.httpserver.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,14 +14,14 @@ public class ServerListenerThread extends Thread {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ServerListenerThread.class);
 
-    private int port;
-    private String webroot;
+   private Configuration cnf;
     private ServerSocket serverSocket;
 
-    public ServerListenerThread(int port, String webroot) throws IOException {
-        this.port = port;
-        this.webroot = webroot;
-        this.serverSocket = new ServerSocket(this.port);
+
+    public ServerListenerThread(Configuration cnf) throws IOException {
+
+       this.cnf = cnf;
+        this.serverSocket = new ServerSocket(cnf.getPort());
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ServerListenerThread extends Thread {
 
                 LOGGER.info(" * Connection accepted: " + socket.getInetAddress());
 
-                HttpConnectionWorkerThread workerThread = new HttpConnectionWorkerThread(socket);
+                HttpConnectionWorkerThread workerThread = new HttpConnectionWorkerThread(socket ,cnf);
                 workerThread.start();
 
             }

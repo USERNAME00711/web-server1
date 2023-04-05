@@ -23,7 +23,7 @@ import java.io.IOException;
 public class ConfigurationManager {
 
     private static ConfigurationManager myConfigurationManager;
-    private static Configuration myCurrentConfiguration;
+
     private List<Configuration> configuration ;
 
 
@@ -49,6 +49,7 @@ public class ConfigurationManager {
 
 
     public List<Configuration> getCurrentConfiguration() {
+
         return configuration;
     }
 }

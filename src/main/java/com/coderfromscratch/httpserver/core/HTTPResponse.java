@@ -13,13 +13,16 @@ public class HTTPResponse {
     private Map<String, String> headers;
     private String content;
     private String contentType;
+    private String webroot;
 
-    public HTTPResponse() {
+
+    public HTTPResponse(String webroot) {
         this.statusCode = 200;
         this.statusMessage = "OK";
         this.headers = new HashMap<>();
         this.content = "\"<html><head><title>Simple Java HTTP Server</title></head><body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
         this.contentType = "text/html";
+        this.webroot = webroot;
     }
 
     public void setStatusCode(int statusCode) {
@@ -60,7 +63,7 @@ public class HTTPResponse {
             // Execute PHP script and capture output (body)
         String path = Configuration.getWebroot();
         System.out.println(path);
-            ProcessBuilder pb = new ProcessBuilder("php", path+"\\script.php");
+            ProcessBuilder pb = new ProcessBuilder("php", webroot+"\\script.php");
             Process p = pb.start();
             String output = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
             out.write(output.getBytes());

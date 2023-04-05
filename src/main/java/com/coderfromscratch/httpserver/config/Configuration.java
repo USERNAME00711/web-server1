@@ -10,6 +10,10 @@ public  class Configuration {
         return port;
     }
 
+    public static String getDomain() {
+        return domain;
+    }
+
     public  void setPort(int port) {
         this.port = port;
     }
@@ -17,9 +21,7 @@ public  class Configuration {
     public  static String getWebroot() {
         return webroot;
     }
-    public  static String getdomain() {
-        return domain;
-    }
+
 
     public void setWebroot(String webroot) {
         this.webroot = webroot;
