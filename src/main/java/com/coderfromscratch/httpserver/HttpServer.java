@@ -20,18 +20,18 @@ public class HttpServer {
         LOGGER.info("Server starting...");
         ConfigurationManager.getInstance().loadConfigurationFile("/home/abderrahmane/web-server1/src/main/resources/http.json");
         conf = ConfigurationManager.getInstance().getCurrentConfiguration();
-        for ( int i =0;i<conf.size();i++)
-        try {
-             Configuration configuration = conf.get(i);
-             LOGGER.info("Using Port: " + configuration.getPort());
-             LOGGER.info("Using WebRoot: " + configuration.getWebroot());
+        for ( int i =0;i<conf.size();i++) {
+            Configuration configuration = conf.get(i);
+            LOGGER.info("Using Port: " + configuration.getPort());
+            LOGGER.info("Using WebRoot: " + configuration.getWebroot());
 
-            ServerListenerThread serverListenerThread = new ServerListenerThread(configuration.getPort(), configuration.getWebroot());
-            serverListenerThread.start();
-
-           } catch (IOException e) {
-              e.printStackTrace();
-              //TODO handle later.
+            try {
+                ServerListenerThread serverListenerThread = new ServerListenerThread(configuration.getPort(), configuration.getWebroot());
+                serverListenerThread.start();
+                } catch (IOException e) {
+                   e.printStackTrace();
+                   //TODO handle later.
+            }
         }
 
 
