@@ -57,12 +57,6 @@ public class HTTPResponse {
             out.write(headerLine.getBytes(StandardCharsets.UTF_8));
         }
         out.write("\r\n".getBytes(StandardCharsets.UTF_8));
-
-
-
-            // Execute PHP script and capture output (body)
-
-
             ProcessBuilder pb = new ProcessBuilder("php", webroot+"\\script.php");
             Process p = pb.start();
             String output = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
