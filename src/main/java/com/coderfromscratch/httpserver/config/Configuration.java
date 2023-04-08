@@ -3,14 +3,15 @@ package com.coderfromscratch.httpserver.config;
 public  class Configuration {
 
     private int port;
-    private static String  webroot;
-    private static String  domain;
+    private  String  webroot;
+    private  String  domain;
+    private String defaulte;
 
     public int getPort() {
         return port;
     }
 
-    public static String getDomain() {
+    public  String getDomain() {
         return domain;
     }
 
@@ -18,7 +19,7 @@ public  class Configuration {
         this.port = port;
     }
 
-    public  static String getWebroot() {
+    public   String getWebroot() {
         return webroot;
     }
 
@@ -28,5 +29,13 @@ public  class Configuration {
     }
     public void setDomain(String domain) {
         this.domain= domain;
+    }
+
+    public String getDefaulte() {
+        return defaulte;
+    }
+
+    public void setDefaulte(String defaulte) {
+        this.defaulte = defaulte;
     }
 }

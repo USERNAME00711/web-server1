@@ -5,6 +5,7 @@ public class HttpRequestligne {
     String Uri;
 
 
+
     public HttpRequestligne(String Mehod,String uri ,String protocole) {
         Uri = uri;
         mehod=Mehod;
@@ -35,4 +36,17 @@ public class HttpRequestligne {
     public void setMehod(String mehod) {
         this.mehod = mehod;
     }
+    public String getresourse() {
+       int i =this.Uri.indexOf("?");
+       if(i>0){return Uri.substring(0,i);}
+       else{return Uri;}
+    }
+    public String getparams() {
+        int i =this.Uri.indexOf("?");
+        if(i>0){return Uri.substring(i+1);}
+        else{return null;}
+    }
+
+
+
 }

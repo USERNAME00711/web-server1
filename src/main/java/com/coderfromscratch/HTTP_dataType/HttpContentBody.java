@@ -38,4 +38,7 @@ public class HttpContentBody {
     }
 
 
+    public String getBody() {
+        return body;
+    }
 }

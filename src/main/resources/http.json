@@ -1,13 +1,15 @@
 [
 {
-  "port": 8082,
-  "webroot": "C:\\Users\\hp elitebook\\Desktop\\WebRoot",
-  "domain" : "www.test1.com"
+  "port": 8081,
+  "webroot": "/home/abderrahmane/webroot1",
+  "domain" : "www.test1.com",
+  "defaulte": "/home/abderrahmane/webroot1/index.html"
 },
   {
-    "port": 8081,
-    "webroot": "C:\\Users\\hp elitebook\\Desktop\\WebRoot2",
-    "domain" : "www.test.com"
+    "port": 8082,
+    "webroot": "/home/abderrahmane/webroot2",
+    "domain" : "www.test.com",
+    "defaulte": "/home/abderrahmane/webroot2/index.html"
   }
 
 ]
