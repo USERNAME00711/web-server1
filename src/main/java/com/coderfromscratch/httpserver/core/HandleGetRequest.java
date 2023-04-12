@@ -33,7 +33,7 @@ public class HandleGetRequest implements HandleRequest {
         return isscrypte;
     }
     @Override
-    public HttpResponse HandelRequest(HttpRequest httpRequest, Configuration cnf) throws IOException {
+    public HttpResponse HandelRequest(HttpRequest httpRequest, Configuration cnf) throws IOException, InterruptedException {
         HttpResponse httpResponse =new HttpResponse();
         HttpStatuseLigne httpStatuseLigne = new HttpStatuseLigne();
         String webroot=cnf.getWebroot();
@@ -71,7 +71,9 @@ public class HandleGetRequest implements HandleRequest {
                    ProcessBuilder processBuilder = new ProcessBuilder("php","-f",resours,"-d","cgi.force_redirect=0");
                    processBuilder.environment().put("REQUEST_METHOD", "GET");
                    if(query!=null){
-                   processBuilder.environment().put("QUERY_STRING", query);}
+                       processBuilder.environment().put("QUERY_STRING", query);
+                       System.out.println( query);
+                   }
                    processBuilder.environment().put("REDIRECT_STATUS", "200");
                    processBuilder.environment().put("GATEWAY_INTERFACE", "CGI/1.1");
                    //processBuilder.environment().put("SCRIPT_NAME", "script.php");
@@ -81,22 +83,40 @@ public class HandleGetRequest implements HandleRequest {
                    processBuilder.environment().put("SERVER_PROTOCOL", "HTTP/1.1");
                    processBuilder.environment().put("CONTENT_LENGTH" ,"0");
 
+                 String content;
+                 int size;
                    Process process = processBuilder.start();
+                   if (process.waitFor() == -1){
+                       httpStatuseLigne.setStatusCode("500");
+                        content= "<html><h1> 500 page not fond </h1></html>";
+                         size = content.length();
 
-                   byte[] outputBytes = process.getInputStream().readAllBytes();
-                   int size=outputBytes.length;
-                   String output = new String(outputBytes);
+                   }
+                   else {
+                       httpStatuseLigne.setStatusCode("200");
+                       byte[] outputBytes = process.getInputStream().readAllBytes();
+                        size=outputBytes.length;
+                        content = new String(outputBytes);
 
-                   HttpContentBody httpContentBody=new HttpContentBody(output);
-                   httpResponse.setHttpContentBody(httpContentBody);
+
+
+
+
+
+                   }
+
+                 HttpContentBody httpContentBody=new HttpContentBody(content);
+                 httpResponse.setHttpContentBody(httpContentBody);
+                 httpResponse.putHeder("Content-Length",Integer.toString(size));
+
+
+
                    httpStatuseLigne.setProtcoleVersion("HTTP/1.1");
                    httpStatuseLigne.setStatusCode("200");
                    httpStatuseLigne.setStatusMessage("ok");
-                   httpResponse.putHeder("Content-Length",Integer.toString(size));
                    httpResponse.setHttpStatuseLigne( httpStatuseLigne);
                    httpResponse.putHeder("Content-Type","text/html");
-                   // BufferedInputStream bufferedInputStream = new BufferedInputStream(process.getInputStream());
-                   //httpResponse.setBufferedInputStream(bufferedInputStream);
+
 
 
                   }
@@ -104,11 +124,14 @@ public class HandleGetRequest implements HandleRequest {
         }
         else
         {
+            httpStatuseLigne.setProtcoleVersion("HTTP/1.1");
             httpStatuseLigne.setStatusCode("404");
             httpStatuseLigne.setStatusMessage("Not Found");
             httpResponse.setHttpStatuseLigne(httpStatuseLigne);
             httpResponse.putHeder("Content-Type","text/html");
-            String content= "<html><h>page not fond </h></html>";
+            String content= "<html><h1> 404 page not fond </h1></html>";
+            HttpContentBody httpcontent=new HttpContentBody(content);
+            httpResponse.setHttpContentBody(httpcontent);
 
         }
         return httpResponse;

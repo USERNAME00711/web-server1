@@ -7,6 +7,6 @@ import com.coderfromscratch.httpserver.config.Configuration;
 import java.io.IOException;
 
 public interface HandleRequest {
-    public HttpResponse HandelRequest(HttpRequest httpRequest, Configuration cnf ) throws IOException;
+    public HttpResponse HandelRequest(HttpRequest httpRequest, Configuration cnf ) throws IOException, InterruptedException;
 
 }

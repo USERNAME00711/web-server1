@@ -234,7 +234,7 @@ public class HttpConnectionWorkerThread extends Thread {
              try {
                  httpResponse=requestHandler.HandelRequest( my_request,cnf);
 
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
              }
         try {

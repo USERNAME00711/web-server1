@@ -60,6 +60,7 @@ public class HTTPResponse {
             ProcessBuilder pb = new ProcessBuilder("php", webroot+"\\script.php");
             Process p = pb.start();
             String output = new String(p.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        System.out.println(content);
             out.write(output.getBytes());
 
 
