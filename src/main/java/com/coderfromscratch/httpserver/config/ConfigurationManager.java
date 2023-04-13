@@ -24,7 +24,7 @@ public class ConfigurationManager {
 
     private static ConfigurationManager myConfigurationManager;
 
-    private List<Configuration> configuration ;
+    private List<Configuration>  hosts ;
 
 
     private ConfigurationManager() {
@@ -43,13 +43,13 @@ public class ConfigurationManager {
         String jason=new String(Files.readAllBytes(Path.of(filePath)));
         ObjectMapper objectMapper=new ObjectMapper();
 
-        configuration=objectMapper.readValue(jason,new TypeReference<List<Configuration>>(){});
+        hosts=objectMapper.readValue(jason,new TypeReference<List<Configuration>>(){});
 
     }
 
 
     public List<Configuration> getCurrentConfiguration() {
 
-        return configuration;
+        return hosts;
     }
 }

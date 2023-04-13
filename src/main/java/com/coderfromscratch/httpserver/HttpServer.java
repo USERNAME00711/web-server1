@@ -12,33 +12,34 @@ import java.util.List;
 
 public class HttpServer {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
+
+
+     private final static Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
 
     public static void main(String[] args) throws IOException {
 
         List<Configuration> conf;
         LOGGER.info("Server starting...");
-        ConfigurationManager.getInstance().loadConfigurationFile("C:\\Users\\hp elitebook\\Desktop\\simple-java-http-server\\src\\main\\resources\\http.json");
+        ConfigurationManager.getInstance().loadConfigurationFile("/home/abderrahmane/web-server1/src/main/resources/http.json");
         conf = ConfigurationManager.getInstance().getCurrentConfiguration();
         Configuration configuration;
-        for (int i = 0; i < conf.size(); i++) {
+        for ( int i =0;i<conf.size();i++) {
             configuration = conf.get(i);
             LOGGER.info("Using Port: " + configuration.getPort());
             LOGGER.info("Using WebRoot: " + configuration.getWebroot());
-            LOGGER.info("Using Domain: " + configuration.getDomain());
+            LOGGER.info("Using WebRoot: " + configuration.getDomain());
 
 
             try {
                 ServerListenerThread serverListenerThread = new ServerListenerThread(conf.get(i));
                 serverListenerThread.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-                //TODO handle later.
+                } catch (IOException e) {
+                   e.printStackTrace();
+                   //TODO handle later.
             }
         }
 
 
-    }
+   }
+
 }
-
-

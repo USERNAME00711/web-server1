@@ -58,8 +58,8 @@ public class HandleGetRequest implements HandleRequest {
                 httpStatuseLigne.setStatusCode("200");
                 httpStatuseLigne.setStatusMessage("ok");
                 httpResponse.setHttpStatuseLigne( httpStatuseLigne);
-                httpResponse.putHeder("Content-Type",contentType);
-                httpResponse.putHeder("Content-Length",contentlength);
+                httpResponse.putHeder("Content Type",contentType);
+                httpResponse.putHeder("Content Length",contentlength);
                 FileInputStream Input = new FileInputStream(resours);
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(Input);
                 httpResponse.setBufferedInputStream(bufferedInputStream);

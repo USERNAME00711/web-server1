@@ -1,8 +1,17 @@
 [
-    {
-        "port": 8080,
-        "webroot": "C:\\Users\\hp elitebook\\Desktop\\ServerDashboard",
-        "domain": "www.test1.com",
-        "defaulte": "C:\\Users\\hp elitebook\\Desktop\\ServerDashboard\\index.html"
-    }
+{
+  "port": 8081,
+  "webroot": "/home/abderrahmane/webroot1",
+  "domain" : "www.test1.com",
+  "defaulte": "/home/abderrahmane/webroot1/index.html",
+  "state" : ""
+},
+  {
+    "port": 8082,
+    "webroot": "/home/abderrahmane/webroot2",
+    "domain" : "www.test.com",
+    "defaulte": "/home/abderrahmane/webroot2/index.html",
+     "state" : "started"
+  }
+
 ]
